@@ -2,7 +2,7 @@ import { Confirm, Input, Secret, Select } from "@cliffy/prompt";
 import {
   createVoalteAllSessionsJSON,
   createVoalteAllUsersJSON,
-  createVolateMeSessionExcelFromJSON,
+  createVoalteMeSessionExcelFromJSON,
   getSessionTokenJSON,
 } from "./calls.ts";
 import { VoalteSelection } from "./types.ts";
@@ -83,7 +83,7 @@ async function main() {
           await createVoalteAllSessionsJSON(ADMIN_SESSION_TOKEN);
           break;
         case "VOALTE_ME_EXCEL":
-          await createVolateMeSessionExcelFromJSON();
+          await createVoalteMeSessionExcelFromJSON();
           break;
         case "SESSION_TOKEN":
           console.log(`Admin session token: ${ADMIN_SESSION_TOKEN}`);

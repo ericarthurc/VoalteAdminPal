@@ -180,7 +180,7 @@ export async function createVoalteAllSessionsJSON(session_token: string) {
 }
 
 // using the voalte-all-sessions.json file create an excel report
-export async function createVolateMeSessionExcelFromJSON() {
+export async function createVoalteMeSessionExcelFromJSON() {
   const raw = await Deno.readTextFile("voalte-all-users-sessions.json");
 
   if (!raw) {
