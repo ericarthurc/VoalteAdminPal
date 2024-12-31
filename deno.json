@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.7"
+  },
+  "tasks": {
+    "build": "deno compile -A --env-file --target x86_64-pc-windows-msvc -o ./builds/VoalteAdminPal_v0.7 ./main.ts",
+    "apple": "deno compile -A --env-file --target x86_64-apple-darwin -o ./builds/VoalteAdminPal_Mac_v0.7 ./main.ts"
+  }
+}
