@@ -40,24 +40,39 @@ export async function getSessionTokenJSON(
 async function getAllUsersJSON(
   session_token: string,
 ) {
-  const request = new Request(
-    `https://${VOALTE_DOMAIN}/rest/v2/users/`,
-    {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "Authorization": `VoalteSession ${session_token}`,
+  let users: any[] = [];
+  let offset = 0;
+  const limit = 5000;
+  let hasMore = true;
+
+  while (hasMore) {
+    const request = new Request(
+      `https://${VOALTE_DOMAIN}/rest/v2/users?limit=${limit}&offset=${offset}`,
+      {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": `VoalteSession ${session_token}`,
+        },
       },
-    },
-  );
+    );
 
-  const response = await fetch(request);
+    const response = await fetch(request);
 
-  if (!response.ok) {
-    throw new Error(`bad request: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`bad request: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    users.push(...data);
+
+    offset += limit;
+    if (data.length < limit) {
+      hasMore = false;
+    }
   }
 
-  return await response.json();
+  return users;
 }
 
 // using the session_token return all users session tokens
